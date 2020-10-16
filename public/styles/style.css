@@ -1,0 +1,12 @@
+main,
+body {
+  margin: 0;
+}
+
+h1 {
+  background-color: rgb(82, 139, 204);
+  color: white;
+  padding: 25px;
+  margin: 0;
+  border-bottom: solid 5px rgb(47, 47, 47);
+}
