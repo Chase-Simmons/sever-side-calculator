@@ -11,28 +11,32 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 ///
 
+// variables
+mathOutput = { value: 0 };
+///
+
 // '/calculate'
 app.post('/calculate', (req, res) => {
   console.log(req.body);
   const mathObject = req.body;
-  let mathOutput;
+
+  // function for breaking up object into parts to make a new number from the values
   if (mathObject.mathType === '+') {
-    mathOutput = mathObject.number1 + mathObject.number2;
+    mathOutput.value = mathObject.number1 + mathObject.number2;
   } else if (mathObject.mathType === '-') {
-    {
-      mathOutput = mathObject.number1 - mathObject.number2;
-    }
+    mathOutput.value = mathObject.number1 - mathObject.number2;
   } else if (mathObject.mathType === '*') {
-    mathOutput = mathObject.number1 * mathObject.number2;
+    mathOutput.value = mathObject.number1 * mathObject.number2;
   } else {
-    mathOutput = mathObject.number1 / mathObject.number2;
+    mathOutput.value = mathObject.number1 / mathObject.number2;
   }
-  console.log(mathOutput);
-  res.sendStatus(200);
+  ///
+  res.sendStatus(201); // created
 });
 
 app.get('/calculate', (req, res) => {
-  console.log('initGET');
+  res.send(mathOutput);
+  console.log(mathOutput);
 });
 ///
 
