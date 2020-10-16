@@ -32,6 +32,7 @@ function onClick() {
       data: equationObject,
     })
       .then(function (response) {
+        getResponse();
         console.log(response);
       })
       .catch(function (err) {
@@ -51,3 +52,27 @@ function onClick() {
 function clear() {
   console.log('cleared');
 }
+
+function getResponse() {
+  // get data from server
+  $.ajax({
+    type: 'GET',
+    url: '/calculate',
+  })
+    .then(function (response) {
+      render(response);
+      console.log(response);
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert('could not send item data to server');
+    });
+  ///
+}
+// update DOM
+function render(response) {
+  $('.output-math').empty();
+  $('.output-math').append(response.value);
+  console.log('we hit render');
+}
+///

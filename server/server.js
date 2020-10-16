@@ -22,13 +22,13 @@ app.post('/calculate', (req, res) => {
 
   // function for breaking up object into parts to make a new number from the values
   if (mathObject.mathType === '+') {
-    mathOutput.value = mathObject.number1 + mathObject.number2;
+    mathOutput.value = Number(mathObject.number1) + Number(mathObject.number2);
   } else if (mathObject.mathType === '-') {
-    mathOutput.value = mathObject.number1 - mathObject.number2;
+    mathOutput.value = Number(mathObject.number1) - Number(mathObject.number2);
   } else if (mathObject.mathType === '*') {
-    mathOutput.value = mathObject.number1 * mathObject.number2;
+    mathOutput.value = Number(mathObject.number1) * Number(mathObject.number2);
   } else {
-    mathOutput.value = mathObject.number1 / mathObject.number2;
+    mathOutput.value = Number(mathObject.number1) / Number(mathObject.number2);
   }
   ///
   res.sendStatus(201); // created
