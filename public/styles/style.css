@@ -12,7 +12,7 @@ h1 {
 }
 .table-container {
   width: 600px;
-  height: 400px;
+  height: auto;
   border: solid 3px black;
   margin: auto;
   margin-top: 100px;
@@ -41,4 +41,19 @@ input {
   text-align: center;
   display: inline block;
   border-bottom: solid 2px black;
+}
+
+.output-box {
+  text-align: center;
+  display: inline block;
+  border-bottom: solid 2px black;
+}
+.history-box {
+  text-align: center;
+  display: inline block;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

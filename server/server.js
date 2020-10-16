@@ -13,11 +13,11 @@ app.use(express.static('public'));
 
 // variables
 mathOutput = { value: 0 };
+history = { array: [] };
 ///
 
 // '/calculate'
 app.post('/calculate', (req, res) => {
-  console.log(req.body);
   const mathObject = req.body;
 
   // function for breaking up object into parts to make a new number from the values
@@ -30,15 +30,25 @@ app.post('/calculate', (req, res) => {
   } else {
     mathOutput.value = Number(mathObject.number1) / Number(mathObject.number2);
   }
+  history.array.push({
+    number1: mathObject.number1,
+    mathType: mathObject.mathType,
+    number2: mathObject.number2,
+    value: mathOutput.value,
+  });
+
+  console.log(history.array);
   ///
   res.sendStatus(201); // created
 });
 
 app.get('/calculate', (req, res) => {
   res.send(mathOutput);
-  console.log(mathOutput);
 });
 ///
+app.get('/history', (req, res) => {
+  res.send(history);
+});
 
 // connection listener
 app.listen(PORT, () => {
