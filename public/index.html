@@ -14,19 +14,38 @@
     </head>
     <main>
       <div class="table-container">
-        <div class="input-box">
-          <input class="number1" type="text" />
+        <div class="button-box">
+          <input class="number1" type="read" readonly />
           <input class="number2" type="text" />
+          <button class="calc-button C">C</button>
         </div>
         <div class="button-box">
-          <button class="+ B">+</button>
-          <button class="- B">-</button>
-          <button class="* B">*</button>
-          <button class="/ B">/</button>
-        </div>
-        <div class="button-box">
-          <button class="= B">=</button>
-          <button class="C B">C</button>
+          <table>
+            <tr>
+              <td><button class="calc-button 7">7</button></td>
+              <td><button class="calc-button 8">8</button></td>
+              <td><button class="calc-button 9">9</button></td>
+              <td><button class="calc-button +">+</button></td>
+            </tr>
+            <tr >
+              <td><button class="calc-button 4">4</button></td>
+              <td><button class="calc-button 5">5</button></td>
+              <td><button class="calc-button 6">6</button></td>
+              <td><button class="calc-button -">-</button></td>
+            </tr>
+            <tr >
+              <td><button class="calc-button 1">1</button></td>
+              <td><button class="calc-button 2">2</button></td>
+              <td><button class="calc-button 3">3</button></td>
+              <td><button class="calc-button *">*</button></td>
+            </tr>
+            <tr">
+              <td><button class="calc-button .">.</button></td>
+              <td><button class="calc-button 0">0</button></td>
+              <td><button class="calc-button =">=</button></td>
+              <td><button class="calc-button /">/</button></td>
+            </tr>
+          </table>
         </div>
         <div class="output-box">
           <h4>Output : <span class="output-math">0</span></h4>
