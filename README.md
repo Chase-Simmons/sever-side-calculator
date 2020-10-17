@@ -18,13 +18,13 @@ npm i
 
 How does someone use this application? Tell a user story here.
 
-Input a value
-Select what type of equation you would like to do
-Input a second value
-Click on equals to get a result
-[C] will clear the field
-Clicking on a equation in the history list will repopulate it in the calculator
-[Clear History] button will clear all history
+1. Input a value,
+2. Select what type of equation you would like to do,
+3. Input a second value
+4. Click on equals to get a result
+5. [C] will clear the field
+6. Clicking on a equation in the history list will repopulate it in the calculator
+7. [Clear History] button will clear all history
 
 License
 MIT
