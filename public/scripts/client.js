@@ -117,7 +117,10 @@ function onClick() {
 
   // = or submit button
   if (button.hasClass('=')) {
-    if (number1 != '' || mathType != '') {
+    if (
+      (number1 != '' && tempString != '') ||
+      (mathType != '' && tempString != '')
+    ) {
       number2 = tempString;
       equationObject.number1 = number1;
       equationObject.mathType = mathType;
