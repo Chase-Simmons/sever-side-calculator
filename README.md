@@ -4,7 +4,7 @@ This is a fully functional visual calculator, where all of the math is done serv
 
 To see the fully functional site, please visit: DEPLOYED VERSION OF APP
 
-![ScreenShot](Images/screenshot.png)
+![ScreenShot](images/screenshot.png)
 
 Prerequisites
 
