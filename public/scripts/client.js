@@ -3,6 +3,9 @@ $(document).ready(readyNow);
 function readyNow() {
   console.log('init');
   $('.button-box').on('click', '.calc-button', onClick);
+  $('.history').on('click', '.history-item', grabOldEquation);
+  $('.history-item-clear').on('click', deleteHistory);
+  getHistory();
 }
 // placeholder vars for calc
 let switcher = false;
@@ -12,6 +15,8 @@ let number2 = '';
 let tempString = '';
 ///
 
+let historyObj;
+let allHistory = [];
 let equationObject = { number1: '', mathType: '', number2: '' };
 
 function onClick() {
@@ -49,6 +54,8 @@ function onClick() {
     renderCalc('8');
   } else if (button.hasClass('9')) {
     renderCalc('9');
+  } else if (button.hasClass('.')) {
+    renderCalc('.');
   }
   ///
 
@@ -107,31 +114,41 @@ function onClick() {
     equationObject.mathType = '/';
   }
   ///
-  if (button.hasClass('=')) {
-    number2 = tempString;
-    equationObject.number1 = number1;
-    equationObject.number2 = number2;
-    $('.number1').val('');
-    switcher = false;
-    number1 = '';
-    mathType = '';
-    number2 = '';
-    tempString = '';
 
-    // send data to server
-    $.ajax({
-      type: 'POST',
-      url: '/calculate',
-      data: equationObject,
-    })
-      .then(function (response) {
-        getResponse();
+  // = or submit button
+  if (button.hasClass('=')) {
+    if (number1 != '' || mathType != '') {
+      number2 = tempString;
+      equationObject.number1 = number1;
+      equationObject.mathType = mathType;
+      equationObject.number2 = number2;
+      $('.output-math-equation').empty();
+      $('.output-math-equation').append(`${number1} ${mathType} ${number2}`);
+      $('.number1').val('');
+      switcher = false;
+      number1 = '';
+      mathType = '';
+      number2 = '';
+      tempString = '';
+      ///
+
+      // send data to server
+      $.ajax({
+        type: 'POST',
+        url: '/calculate',
+        data: equationObject,
       })
-      .catch(function (err) {
-        console.log(err);
-        alert('could not send item data to server');
-      });
-    ///
+        .then(function (response) {
+          getResponse();
+        })
+        .catch(function (err) {
+          console.log(err);
+          alert('could not send item data to server');
+        });
+      ///
+    } else {
+      alert('please complete the math equation');
+    }
   }
 
   // clear
@@ -146,9 +163,8 @@ function onClick() {
   }
   ///
 }
-
+// get data from server
 function getResponse() {
-  // get data from server
   $.ajax({
     type: 'GET',
     url: '/calculate',
@@ -161,11 +177,11 @@ function getResponse() {
       console.log(err);
       alert('could not get item data to server');
     });
-  ///
 }
+///
 
+// get data from server
 function getHistory() {
-  // get data from server
   $.ajax({
     type: 'GET',
     url: '/history',
@@ -187,11 +203,42 @@ function renderValue(response) {
 }
 function renderHistory(response) {
   $('.history').empty();
+  allHistory = [];
   for (let i = 0; i < response.array.length; i++) {
-    let obj = response.array[i];
+    historyObj = response.array[i];
+    allHistory.push(response.array[i]);
     $('.history').append(
-      `<li> ${obj.number1} ${obj.mathType} ${obj.number2} = ${obj.value} </li>`
+      `<li><button class="history-item" data-index=${i}>${historyObj.number1} ${historyObj.mathType} ${historyObj.number2} = ${historyObj.value}</button></li>`
     );
   }
+}
+///
+
+// grabs an old equation from the history list
+function grabOldEquation() {
+  index = $(this).data();
+  for (let i = 0; i < allHistory.length; i++)
+    if (index.index === i) {
+      number1 = String(allHistory[i].number1);
+      mathType = allHistory[i].mathType;
+      tempString = String(allHistory[i].number2);
+      newString = number1 + mathType + tempString;
+      $('.number1').val(newString);
+    }
+}
+///
+
+// delete data from server
+function deleteHistory() {
+  $.ajax({
+    type: 'DELETE',
+    url: '/deleteHistory',
+    success: getHistory,
+  })
+    .then(function (response) {})
+    .catch(function (err) {
+      console.log(err);
+      alert('could not get item data to server');
+    });
 }
 ///

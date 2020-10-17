@@ -12,8 +12,8 @@ app.use(express.static('public'));
 ///
 
 // variables
-mathOutput = { value: 0 };
-history = { array: [] };
+let mathOutput = { value: 0 };
+let history = { array: [] };
 ///
 
 // '/calculate'
@@ -48,6 +48,10 @@ app.get('/calculate', (req, res) => {
 ///
 app.get('/history', (req, res) => {
   res.send(history);
+});
+app.delete('/deleteHistory', (req, res) => {
+  history = { array: [] };
+  res.sendStatus(200); // created
 });
 
 // connection listener

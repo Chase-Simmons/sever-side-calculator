@@ -69,3 +69,9 @@ ul {
 .tabler {
   width: 100%;
 }
+.history-item {
+  width: 100%;
+}
+.history-item-clear {
+  margin-bottom: 10px;
+}

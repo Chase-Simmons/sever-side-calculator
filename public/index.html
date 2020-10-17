@@ -15,7 +15,7 @@
     <main>
       <div class="table-container">
         <div class="button-box">
-          <input class="number1" type="read" readonly />
+          <input class="number1" type="read" value=""readonly />
           <button class="calc-button C">C</button>
         </div>
         <div class="button-box">
@@ -47,11 +47,14 @@
           </table>
         </div>
         <div class="output-box">
-          <h4>Output : <span class="output-math">0</span></h4>
+          <h4><span class="output-math-equation"></span> = <span class="output-math"></span></h4>
         </div>
         <div class="history-box">
           <div><h4>History</h4></div>
-          <ul class="history"></ul>
+          <button class="history-item-clear">Clear History</button>
+          <ul class="history">
+            
+          </ul>
         </div>
       </div>
     </main>
