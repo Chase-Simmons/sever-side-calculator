@@ -8,8 +8,9 @@ To see the fully functional site, please visit: DEPLOYED VERSION OF APP
 
 Prerequisites
 
-Node.js
-Express.js
+Node
+Express
+Heroku
 
 Installation
 
@@ -17,14 +18,13 @@ npm i
 
 How does someone use this application? Tell a user story here.
 
-xxx
-xxx
-xxx
-xxx
-xxx
-xxx
-Built With
-List technologies and frameworks here
+Input a value
+Select what type of equation you would like to do
+Input a second value
+Click on equals to get a result
+[C] will clear the field
+Clicking on a equation in the history list will repopulate it in the calculator
+[Clear History] button will clear all history
 
 License
 MIT
