@@ -4,78 +4,119 @@ function readyNow() {
   console.log('init');
   $('.button-box').on('click', '.calc-button', onClick);
 }
+// placeholder vars for calc
+let switcher = false;
+let number1 = '';
+let mathType = '';
+let number2 = '';
+let tempString = '';
+///
+
 let equationObject = { number1: '', mathType: '', number2: '' };
 
 function onClick() {
   let button = $(this);
   console.log('clicked');
 
+  function renderCalc(input) {
+    if (switcher == false) {
+      tempString += input;
+      $('.number1').val(tempString);
+    } else {
+      $('.number1').val('');
+      tempString += input;
+      $('.number1').val(number1 + mathType + tempString);
+    }
+  }
   // check for number clicked
   if (button.hasClass('0')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 0);
+    renderCalc('0');
   } else if (button.hasClass('1')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 1);
+    renderCalc('1');
   } else if (button.hasClass('2')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 2);
+    renderCalc('2');
   } else if (button.hasClass('3')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 3);
+    renderCalc('3');
   } else if (button.hasClass('4')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 4);
+    renderCalc('4');
   } else if (button.hasClass('5')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 5);
+    renderCalc('5');
   } else if (button.hasClass('6')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 6);
+    renderCalc('6');
   } else if (button.hasClass('7')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 7);
+    renderCalc('7');
   } else if (button.hasClass('8')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 8);
+    renderCalc('8');
   } else if (button.hasClass('9')) {
-    const placeholder = $('.number1').val();
-    $('.number1').val(placeholder + 9);
-  }
-  ///
-  // filter out math type
-  if (button.hasClass('+')) {
-    const placeholder = $('.number1').val();
-    if (equationObject.number1 != '') {
-      equationObject.number1 = parseInt(placeholder);
-      $('.number1').val(placeholder + '+');
-    } else {
-      placeholder.replaceAll('+', '1');
-      placeholder.replaceAll('-', '');
-      placeholder.replaceAll('*', '');
-      placeholder.replaceAll('/', '');
-      $('.number1').val(placeholder + '+');
-    }
-    equationObject.mathType = '+';
-  } else if (button.hasClass('-')) {
-    const placeholder = $('.number1').val();
-    if (equationObject.number1 != '') {
-      equationObject.number1 = parseInt(placeholder);
-    }
-    $('.number1').val(placeholder + '-');
-    equationObject.mathType = '-';
-  } else if (button.hasClass('*')) {
-    equationObject.mathType = '*';
-  } else if (button.hasClass('/')) {
-    equationObject.mathType = '/';
+    renderCalc('9');
   }
   ///
 
+  // filter out math type
+  if (button.hasClass('+')) {
+    if (switcher == false) {
+      const placeholder = $('.number1').val();
+      number1 = placeholder;
+      mathType = '+';
+      tempString = '';
+      switcher = true;
+      renderCalc('');
+    } else {
+      mathType = '+';
+      renderCalc('');
+    }
+    equationObject.mathType = '+';
+  } else if (button.hasClass('-')) {
+    if (switcher == false) {
+      const placeholder = $('.number1').val();
+      number1 = placeholder;
+      mathType = '-';
+      tempString = '';
+      switcher = true;
+      renderCalc('');
+    } else {
+      mathType = '-';
+      renderCalc('');
+    }
+    equationObject.mathType = '-';
+  } else if (button.hasClass('*')) {
+    if (switcher == false) {
+      const placeholder = $('.number1').val();
+      number1 = placeholder;
+      mathType = '*';
+      tempString = '';
+      switcher = true;
+      renderCalc('');
+    } else {
+      mathType = '*';
+      renderCalc('');
+    }
+    equationObject.mathType = '*';
+  } else if (button.hasClass('/')) {
+    if (switcher == false) {
+      const placeholder = $('.number1').val();
+      number1 = placeholder;
+      mathType = '/';
+      tempString = '';
+      switcher = true;
+      renderCalc('');
+    } else {
+      mathType = '/';
+      renderCalc('');
+    }
+    equationObject.mathType = '/';
+  }
+  ///
   if (button.hasClass('=')) {
-    equationObject.number1 = $('.number1').val();
-    equationObject.number2 = $('.number2').val();
+    number2 = tempString;
+    equationObject.number1 = number1;
+    equationObject.number2 = number2;
     $('.number1').val('');
-    $('.number2').val('');
+    switcher = false;
+    number1 = '';
+    mathType = '';
+    number2 = '';
+    tempString = '';
 
     // send data to server
     $.ajax({
@@ -95,16 +136,15 @@ function onClick() {
 
   // clear
   if (button.hasClass('C')) {
-    clear();
     equationObject = { number1: 0, mathType: '', number2: 0 };
     $('.number1').val('');
-    $('.number2').val('');
+    switcher = false;
+    number1 = '';
+    mathType = '';
+    number2 = '';
+    tempString = '';
   }
   ///
-}
-
-function clear() {
-  console.log('cleared');
 }
 
 function getResponse() {
