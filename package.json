@@ -1,0 +1,25 @@
+{
+  "name": "jquery-server-side-calculator-master",
+  "version": "1.0.0",
+  "description": "Duration: 10 hours",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "heroku": "^7.46.0",
+    "node": "^14.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chase-Simmons/sever-side-calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chase-Simmons/sever-side-calculator/issues"
+  },
+  "homepage": "https://github.com/Chase-Simmons/sever-side-calculator#readme"
+}
