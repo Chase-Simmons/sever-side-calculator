@@ -2,8 +2,6 @@ Duration: 10 hours
 
 This is a fully functional visual calculator, where all of the math is done server side.
 
-To see the fully functional site, please visit: DEPLOYED VERSION OF APP
-
 ![ScreenShot](images/screenshot.png)
 
 Prerequisites
